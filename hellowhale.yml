@@ -2,23 +2,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello-blue-whale
+  name: tomcat
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: hello-whale-app
+      app: tomcat
       version: blue
   template:
     metadata:
-      name: hello-blue-whale-pod
+      name: tomcat
       labels:
-        app: hello-whale-app
+        app: tomcat
         version: blue
     spec:
       containers:
-      - name: hello-whale-container
-        image: vamsijakkula/hellowhale:latest
+      - name: tomcat
+        image: hello-world/tomcat:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 80
@@ -26,12 +26,12 @@ spec:
 apiVersion: v1
 kind: Service 
 metadata:
-  name: hello-whale-svc
+  name: tomcat
   labels:
-    app: hello-whale-app
+    app: tomcat
 spec:
   selector:
-    app: hello-whale-app
+    app: tomcat
     version: blue
   type: NodePort
   ports:
